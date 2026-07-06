@@ -1,5 +1,10 @@
 # 🍽️ Restaurant Ops Copilot
 
+![Python](https://img.shields.io/badge/python-3.12-blue)
+![Google ADK](https://img.shields.io/badge/Google%20ADK-multi--agent-green)
+![License](https://img.shields.io/badge/license-MIT-lightgrey)
+![Eval Status](https://img.shields.io/badge/evals-5%2F5%20passing-brightgreen)
+
 A multi-agent AI system built with **Google ADK** that helps restaurant staff manage
 bookings, monitor inventory, and get AI-generated recipe inspiration grounded in
 live food trends — while enforcing hard operational guardrails deterministically,
@@ -39,6 +44,26 @@ using ingredients on hand and what's currently trending.
 - **Search Agent** — a dedicated agent wrapping Google Search grounding (ADK
   requires built-in tools to be isolated from custom function tools, hence the
   separate agent).
+
+## Guardrail in Action
+
+The Orchestrator enforces capacity limits deterministically, in Python — not left
+to the LLM's judgment. Here's the same guardrail responding to two different
+requests against identical restaurant state (5 tables, 20:00 already full):
+
+| Request | Slot Status | Agent Response |
+| | | |
+| "Book a table for 2 at 19:30" | Open (capacity available) | ✅ **Confirmed** — "Table confirmed for 2 at 19:30." |
+| "Book a table for 4 at 20:00" | Full (5/5 tables booked) | ❌ **Rejected** — "No tables left at 20:00. Available: 19:00, 19:30, 21:00, 21:30, 22:00." |
+
+The rejection path is not a prompt instruction the LLM might ignore — `confirm_booking`
+physically refuses to execute if `check_booking_capacity` returns `available: false`,
+regardless of what the model generates. This is verified in `evals/eval_cases.json`
+(`booking_within_capacity`, `booking_exceeds_capacity`), not just claimed.
+
+The same pattern protects the Recipe Agent: `get_available_stock` filters out
+zero-stock ingredients (e.g., mozzarella) _before_ the Recipe Agent ever sees them,
+so it is structurally incapable of suggesting a dish requiring an out-of-stock item.
 
 ## Concepts Demonstrated
 
@@ -102,6 +127,10 @@ source venv/bin/activate        # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
+> Versions are pinned in `requirements.txt` for reproducibility — a security best
+> practice against supply-chain drift (e.g. hallucinated or unexpectedly upgraded
+> dependencies), as emphasized in the course's Security whitepaper.
+
 Create a `.env` file at the project root:
 GOOGLE_API_KEY=your_key_from_aistudio.google.com
 GOOGLE_GENAI_USE_VERTEXAI=FALSE
@@ -149,7 +178,24 @@ Spicy Fish Tacos with Fresh Tomato and Basil Salsa
 
 Rustic Beef and Onion Stir-fry with Fresh Basil
 
-text
+## Limitations
+
+This is a capstone-scoped prototype, not a production system. Known limitations:
+
+- **Mock data only** — bookings and inventory are static JSON files, not connected
+  to a real POS or reservation system.
+- **Single restaurant, single day** — no multi-location or multi-day scheduling logic.
+- **No staff scheduling agent** — deliberately descoped to keep the two core agents
+  (Booking/Inventory Orchestrator, Recipe Specialist) fully working and well-tested,
+  rather than spreading effort across four shallow agents. See Roadmap below.
+- **No persistent memory across sessions** — each `adk run` session starts fresh;
+  there's no long-term memory store (e.g., vector DB) for past bookings or preferences.
+- **No production security hardening** — no sandboxing, IAM, or identity layer beyond
+  environment-variable API key management. Appropriate for a local demo, not for
+  handling real customer data.
+- **LLM output wording varies run to run** — evaluation cases use flexible
+  (`contains_any`) matching for natural language output rather than exact strings,
+  since phrasing is inherently non-deterministic; only tool-call behavior is checked strictly.
 
 ## Roadmap (Future Scope)
 

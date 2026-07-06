@@ -1,4 +1,8 @@
-google-adk
-google-genai
-streamlit
-pydantic
+google-adk==2.3.0
+google-genai==2.10.0
+plotly==6.8.0
+pydantic==2.13.4
+pydantic-settings==2.5.0
+pydantic_core==2.46.4
+python-dotenv==1.0.1
+streamlit==1.58.0
