@@ -19,24 +19,17 @@ using ingredients on hand and what's currently trending.
 
 ## Architecture
 
-┌─────────────────────┐
-│ Orchestrator Agent │
-│ (booking + inventory)│
-└──────────┬───────────┘
-│ transfer_to_agent
-▼
-┌─────────────────────┐
-│ Recipe Agent │
-│ ("Get Inspired") │
-└──────────┬───────────┘
-│ AgentTool call
-▼
-┌─────────────────────┐
-│ Search Agent │
-│ (Google Search grounding)│
-└─────────────────────┘
+![Restaurant Ops Copilot Architecture](assets/architecture.png)
 
-text
+- **Orchestrator Agent** — owns booking and inventory tools, enforces the capacity
+  guardrail, and delegates recipe requests to the Recipe Agent via ADK's native
+  agent-to-agent transfer mechanism.
+- **Recipe Agent** — reads current in-stock ingredients, calls the Search Agent for
+  live trending dishes, Michelin-star restaurant recipes, and chef cookbooks, then
+  suggests 2-3 ideas using only what's actually in stock.
+- **Search Agent** — a dedicated agent wrapping Google Search grounding (ADK
+  requires built-in tools to be isolated from custom function tools, hence the
+  separate agent).
 
 - **Orchestrator Agent** — owns booking and inventory tools, enforces the capacity
   guardrail, and delegates recipe requests to the Recipe Agent via ADK's native
