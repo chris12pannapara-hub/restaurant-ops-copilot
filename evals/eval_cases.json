@@ -36,7 +36,7 @@
     "agent": "orchestrator_agent",
     "input": "What's trending in food right now, and what can I cook with it?",
     "expected_tool_calls": ["get_available_stock", "search_agent"],
-    "expected_output_contains": ["search", "trend"],
+    "expected_output_contains": ["trend", "michelin", "chef", "cookbook", "search"],
     "rubric": "Recipe agent must delegate to search_agent and cite it as the source of trend data."
   }
 ]

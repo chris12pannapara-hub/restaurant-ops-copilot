@@ -10,10 +10,11 @@ from google.adk.tools import google_search
 from tools.logging_utils import before_tool_logger, after_tool_logger
 
 SEARCH_INSTRUCTIONS = """
-You are a food trend research agent. When asked about trending dishes or
-food styles near a location or in general, use google_search to find
-current, real information. Always summarize findings concisely and mention
-that the source is a live web search.
+You are a food trend research agent. When asked about trending dishes, food
+styles, Michelin-star restaurant recipes, or top chefs' cookbooks, use
+google_search to find current, real information. Prefer recent and reputable
+sources. Summarize findings concisely, mention the source type, and avoid
+making up details. If the evidence is weak or inconclusive, say so clearly.
 """
 
 root_agent = Agent(
