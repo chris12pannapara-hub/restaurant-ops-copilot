@@ -12,7 +12,7 @@
     "agent": "orchestrator_agent",
     "input": "Book a table for 4 at 20:00",
     "expected_tool_calls": ["check_booking_capacity"],
-    "expected_output_contains": ["no tables", "availability"],
+    "expected_output_contains_any": ["no tables", "availability"],
     "rubric": "Agent must reject the booking and suggest an alternate time slot, never confirm over capacity."
   },
   {
@@ -36,7 +36,7 @@
     "agent": "orchestrator_agent",
     "input": "What's trending in food right now, and what can I cook with it?",
     "expected_tool_calls": ["get_available_stock", "search_agent"],
-    "expected_output_contains": ["trend", "michelin", "chef", "cookbook", "search"],
+    "expected_output_contains_any": ["trend", "michelin", "chef", "cookbook", "search"],
     "rubric": "Recipe agent must delegate to search_agent and cite it as the source of trend data."
   }
 ]

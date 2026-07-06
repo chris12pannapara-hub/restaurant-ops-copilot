@@ -7,7 +7,7 @@
       "check_booking_capacity",
       "confirm_booking"
     ],
-    "output_snippet": "Your table for 2 at 19:30 has been confirmed."
+    "output_snippet": "Your booking for 2 at 19:30 is confirmed."
   },
   {
     "id": "booking_exceeds_capacity",
@@ -16,7 +16,7 @@
     "tool_calls_made": [
       "check_booking_capacity"
     ],
-    "output_snippet": "I'm sorry, there are no tables left at 20:00 for a party of 4. We have availability at 19:00, 19:30, 21:00, 21:30, and 22:00."
+    "output_snippet": "I am sorry, there are no tables left at 20:00 for a party of 4. Would you like to book a table at 19:00, 19:30, 21:00, 21:30, or 22:00 instead?"
   },
   {
     "id": "low_stock_flagged",
@@ -25,7 +25,7 @@
     "tool_calls_made": [
       "check_inventory"
     ],
-    "output_snippet": "We are out of mozzarella, 0 kg remaining."
+    "output_snippet": "Mozzarella is out of stock (0 kg)."
   },
   {
     "id": "recipe_respects_stock_guardrail",
@@ -34,9 +34,12 @@
     "tool_calls_made": [
       "get_available_stock",
       "transfer_to_agent",
+      "search_agent",
+      "search_agent",
+      "search_agent",
       "search_agent"
     ],
-    "output_snippet": "Here are 2-3 dish ideas you can cook tonight, using your available stock and current food trends:\n\n1.  **Beef Empanadas:** This aligns with the \"Global Flavors and Fusion Cuisine\" trend, as found in a live web search. You have beef, flour, onions, and tomatoes in stock, all essential ingredients for"
+    "output_snippet": "Here are 3 recipe ideas that fit your current stock:\n\n*   **Roasted Tomato and Basil Chicken**\n    *   Why it fits the current stock: This dish utilizes your available chicken, tomatoes, basil, and onion.\n    *   Source type: [Trending]\n    *   One-sentence evidence summary: \"One Pan Tomato Basil Ch"
   },
   {
     "id": "recipe_cites_trend_source",
@@ -47,6 +50,6 @@
       "transfer_to_agent",
       "search_agent"
     ],
-    "output_snippet": "Based on a live web search via search_agent, here are a few trending dishes you can create with your current stock:\n\n1.  **\"Nostalgia Remixed\" Rustic Beef & Onion Pie with Crispy Basil Topping:** This dish taps into the \"Nostalgia Remixed & Comfort Classics\" trend. You can use your beef, onions, flo"
+    "output_snippet": "Here are 3 recipe ideas that fit your current stock and are inspired by current food trends:\n\n1.  **Mediterranean-Inspired Baked Fish with Tomato and Basil**\n    *   Why it fits the current stock: This dish utilizes fish, fresh tomatoes, basil, and onions, all of which are in your available stock.\n "
   }
 ]
