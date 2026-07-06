@@ -19,7 +19,7 @@ using ingredients on hand and what's currently trending.
 
 ## Architecture
 
-![Restaurant Ops Copilot Architecture](assets/architecture.png)
+![Restaurant Ops Copilot Architecture](assets/architecture_image.png)
 
 - **Orchestrator Agent** — owns booking and inventory tools, enforces the capacity
   guardrail, and delegates recipe requests to the Recipe Agent via ADK's native
