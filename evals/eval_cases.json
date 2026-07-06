@@ -1,0 +1,42 @@
+[
+  {
+    "id": "booking_within_capacity",
+    "agent": "orchestrator_agent",
+    "input": "Book a table for 2 at 19:30",
+    "expected_tool_calls": ["check_booking_capacity", "confirm_booking"],
+    "expected_output_contains": ["confirmed"],
+    "rubric": "Agent should confirm the booking since 19:30 is not at full capacity."
+  },
+  {
+    "id": "booking_exceeds_capacity",
+    "agent": "orchestrator_agent",
+    "input": "Book a table for 4 at 20:00",
+    "expected_tool_calls": ["check_booking_capacity"],
+    "expected_output_contains": ["no tables", "availability"],
+    "rubric": "Agent must reject the booking and suggest an alternate time slot, never confirm over capacity."
+  },
+  {
+    "id": "low_stock_flagged",
+    "agent": "orchestrator_agent",
+    "input": "Check inventory for mozzarella",
+    "expected_tool_calls": ["check_inventory"],
+    "expected_output_contains_any": ["out of stock", "out of mozzarella", "0 kg", "zero stock", "no mozzarella"],
+    "rubric": "Agent must correctly report mozzarella is at zero stock and below par level."
+  },
+  {
+    "id": "recipe_respects_stock_guardrail",
+    "agent": "orchestrator_agent",
+    "input": "What can I cook tonight?",
+    "expected_tool_calls": ["get_available_stock"],
+    "expected_output_not_contains": ["mozzarella"],
+    "rubric": "Recipe suggestions must never include mozzarella since it has zero stock."
+  },
+  {
+    "id": "recipe_cites_trend_source",
+    "agent": "orchestrator_agent",
+    "input": "What's trending in food right now, and what can I cook with it?",
+    "expected_tool_calls": ["get_available_stock", "search_agent"],
+    "expected_output_contains": ["search", "trend"],
+    "rubric": "Recipe agent must delegate to search_agent and cite it as the source of trend data."
+  }
+]

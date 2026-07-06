@@ -1,0 +1,52 @@
+[
+  {
+    "id": "booking_within_capacity",
+    "passed": true,
+    "reasons": [],
+    "tool_calls_made": [
+      "check_booking_capacity",
+      "confirm_booking"
+    ],
+    "output_snippet": "Your table for 2 at 19:30 has been confirmed."
+  },
+  {
+    "id": "booking_exceeds_capacity",
+    "passed": true,
+    "reasons": [],
+    "tool_calls_made": [
+      "check_booking_capacity"
+    ],
+    "output_snippet": "I'm sorry, there are no tables left at 20:00 for a party of 4. We have availability at 19:00, 19:30, 21:00, 21:30, and 22:00."
+  },
+  {
+    "id": "low_stock_flagged",
+    "passed": true,
+    "reasons": [],
+    "tool_calls_made": [
+      "check_inventory"
+    ],
+    "output_snippet": "We are out of mozzarella, 0 kg remaining."
+  },
+  {
+    "id": "recipe_respects_stock_guardrail",
+    "passed": true,
+    "reasons": [],
+    "tool_calls_made": [
+      "get_available_stock",
+      "transfer_to_agent",
+      "search_agent"
+    ],
+    "output_snippet": "Here are 2-3 dish ideas you can cook tonight, using your available stock and current food trends:\n\n1.  **Beef Empanadas:** This aligns with the \"Global Flavors and Fusion Cuisine\" trend, as found in a live web search. You have beef, flour, onions, and tomatoes in stock, all essential ingredients for"
+  },
+  {
+    "id": "recipe_cites_trend_source",
+    "passed": true,
+    "reasons": [],
+    "tool_calls_made": [
+      "get_available_stock",
+      "transfer_to_agent",
+      "search_agent"
+    ],
+    "output_snippet": "Based on a live web search via search_agent, here are a few trending dishes you can create with your current stock:\n\n1.  **\"Nostalgia Remixed\" Rustic Beef & Onion Pie with Crispy Basil Topping:** This dish taps into the \"Nostalgia Remixed & Comfort Classics\" trend. You can use your beef, onions, flo"
+  }
+]

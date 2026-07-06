@@ -1,0 +1,10 @@
+{
+  "tomatoes": {"qty": 12, "unit": "kg", "par_level": 10},
+  "basil": {"qty": 3, "unit": "kg", "par_level": 5},
+  "mozzarella": {"qty": 0, "unit": "kg", "par_level": 8},
+  "flour": {"qty": 20, "unit": "kg", "par_level": 15},
+  "beef": {"qty": 25, "unit": "kg", "par_level": 30},
+  "chicken": {"qty": 9, "unit": "kg", "par_level": 10},
+  "onion": {"qty": 2, "unit": "kg", "par_level": 8},
+  "fish": {"qty": 11, "unit": "kg", "par_level": 15}
+}
